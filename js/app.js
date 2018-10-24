@@ -24,12 +24,56 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+class Boy {
+    constructor() {
+        this.xdiff = 101;
+        this.ydiff = 83;
+        this.initx = this.xdiff * 2;
+        this.inity = (this.ydiff * 5) - 10;
+        this.x = this.initx;
+        this.y = this.inity;
+        this.sprite = 'images/char-boy.png';
+    }
 
+    // Render boy at x,y coord
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    // move boy using arrow keys
+    handleInput(input) {
+        switch (input) {
+            case 'up':
+                if (this.y > 0) {
+                    this.y -= this.ydiff;
+                }
+                break;
+            case 'down':
+                if (this.y < this.ydiff * 4) {
+                    this.y += this.ydiff;
+                }
+                break;
+            case 'left':
+                if (this.x > 0) {
+                    this.x -= this.xdiff;
+                }
+                break;
+            case 'right':
+                if (this.x < this.xdiff * 4) {
+                    this.x += this.xdiff;
+                }
+                break;
+            default: 
+                alert('Please use arrow keys to move player');
+                break;
+        }
+    }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+const player = new Boy();
 
 
 // This listens for key presses and sends the keys to your
