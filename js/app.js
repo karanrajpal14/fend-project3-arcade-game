@@ -44,11 +44,31 @@ class Boy {
         this.x = this.initx;
         this.y = this.inity;
         this.sprite = 'images/char-boy.png';
+        this.gameWon = false;
     }
 
     // Render boy at x,y coord
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    update(){
+        allEnemies.forEach(enemy => {
+            if(
+                this.y === enemy.y &&
+                (enemy.x + enemy.xdiff/2 > this.x && enemy.x < this.x + this.xdiff/2)
+                ){
+                this.reset();
+            }
+        });
+        if(this.y === -28){
+            this.gameWon = true;
+        }
+    }
+
+    reset () {
+        this.x = this.initx;
+        this.y = this.inity;
     }
 
     // move boy using arrow keys
