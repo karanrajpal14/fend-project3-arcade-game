@@ -40,7 +40,7 @@ class Boy {
         this.xdiff = 101;
         this.ydiff = 83;
         this.initx = this.xdiff * 2;
-        this.inity = (this.ydiff * 5) - 10;
+        this.inity = (this.ydiff * 4) + 55;
         this.x = this.initx;
         this.y = this.inity;
         this.sprite = 'images/char-boy.png';
@@ -107,11 +107,10 @@ class Boy {
 const player = new Boy();
 const bugger1 = new Enemy(-101, 0, 200);
 const bugger2 = new Enemy(-101, 83, 300);
-const bugger3 = new Enemy((-101 * 2.5), 83, 400);
+const bugger3 = new Enemy((-101 * 2.5), (83 *2), 400);
 const allEnemies = [];
 
 allEnemies.push(bugger1, bugger2, bugger3);
-console.log(allEnemies);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
