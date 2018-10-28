@@ -22,7 +22,33 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        id;
+
+    const modal = document.querySelector('.modal');
+    const closeButton = document.querySelector('.modal-close');
+    const replay = document.querySelector('.modal-replay');
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function resetGame() {
+        toggleModal();
+        player.reset();
+        player.gameWon = false;
+        win.requestAnimationFrame(main);
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    closeButton.addEventListener("click", toggleModal);
+    replay.addEventListener('click', resetGame);
+    window.addEventListener("click", windowOnClick);
 
     canvas.width = 505;
     canvas.height = 606;
@@ -55,7 +81,12 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if(player.gameWon) {
+            win.cancelAnimationFrame(id);
+            toggleModal();
+        } else {
+            id = win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
