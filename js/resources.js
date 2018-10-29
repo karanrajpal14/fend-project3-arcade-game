@@ -5,9 +5,8 @@
  * to load the same image multiple times.
  */
 (function() {
-    var resourceCache = {};
-    var loading = [];
-    var readyCallbacks = [];
+    let resourceCache = {};
+    let readyCallbacks = [];
 
     /* This is the publicly accessible image loading function. It accepts
      * an array of strings pointing to image files or a string for a single
@@ -82,8 +81,8 @@
      * for loading have in fact been properly loaded.
      */
     function isReady() {
-        var ready = true;
-        for(var k in resourceCache) {
+        let ready = true;
+        for(let k in resourceCache) {
             if(resourceCache.hasOwnProperty(k) &&
                !resourceCache[k]) {
                 ready = false;
